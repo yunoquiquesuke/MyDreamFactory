@@ -1,10 +1,11 @@
 class DreamsController < ApplicationController
 
   def index
-    @dreams = Dream.all.order(created_at: 'desc')
+    @dreams = Dream.all.order(created_at: 'asc')
   end
 
   def new
+    @dream = Dream.new
   end
 
   def show
@@ -12,8 +13,13 @@ class DreamsController < ApplicationController
   end
 
   def create
-    @dream = Dream.create(dream_params)
-    redirect_to dreams_path
+    @dream = Dream.new(dream_params)
+    if @dream.save
+      redirect_to dreams_path
+    else
+      render 'new'
+      # render plain: @dream.errors.inspect
+    end
   end
 
   def edit
@@ -21,6 +27,12 @@ class DreamsController < ApplicationController
   end
 
   def update
+    @dream = Dream.find(params[:id])
+    if @dream.update(dream_params)
+      redirect_to dreams_path
+    else
+      render 'edit'
+    end
   end
 
   def destroy
@@ -28,6 +40,6 @@ class DreamsController < ApplicationController
 
   private
     def dream_params
-      params.require(:dream).permit(:name, :due)
+      params.require(:dream).permit(:name, :due, :is_done)
     end
 end
