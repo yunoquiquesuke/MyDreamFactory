@@ -1,0 +1,9 @@
+<h2>
+  <%= @dream.name %>のプロジェクト一覧
+</h2>
+
+<p>
+  期限は<%= @dream.due %>
+  <%= link_to '[ちょっと変更]', edit_dream_path(@dream), class: "command" %>
+  <%= link_to '[削除]', dream_path(@dream), method: :delete, class: "command", data: { confirm: 'ほんと？' } %>
+</p>

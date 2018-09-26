@@ -1,4 +1,4 @@
-class DreamsController < ApplicationController
+class DreamController < ApplicationController
 
   def index
     @dreams = Dream.all.order(created_at: 'asc')
@@ -15,7 +15,7 @@ class DreamsController < ApplicationController
   def create
     @dream = Dream.new(dream_params)
     if @dream.save
-      redirect_to dreams_path
+      redirect_to dream_index_path
     else
       render 'new'
       # render plain: @dream.errors.inspect
@@ -29,13 +29,16 @@ class DreamsController < ApplicationController
   def update
     @dream = Dream.find(params[:id])
     if @dream.update(dream_params)
-      redirect_to dreams_path
+      redirect_to dream_index_path
     else
       render 'edit'
     end
   end
 
   def destroy
+    @dream = Dream.find(params[:id])
+    @dream.destroy
+    redirect_to dream_index_path
   end
 
   private

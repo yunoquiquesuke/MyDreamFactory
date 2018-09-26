@@ -1,5 +1,5 @@
-<h1>What is your new Dream?</h1>
-<%= form_for :dream, url: dreams_path do |f| %>
+<h1>Do you want to make a minor change to your dream?</h1>
+<%= form_for @dream, url: dream_path(@dream) do |f| %>
 <p>
   <%= f.text_field :name, placeholder: 'enter your dream' %>
   <% if @dream.errors.messages[:name].any? %>

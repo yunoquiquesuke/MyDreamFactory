@@ -2,10 +2,9 @@
 <p>
   <%= link_to '新規Dream作成', new_dream_path, class: 'new_button' %>
 </p>
-<ul>
+
   <% @dreams.each do |dream| %>
-  <li>
+<h2>
     <%= link_to dream.name, dream_path(dream.id) %>
-  </li>
+</h2>
   <% end %>
-</ul>
