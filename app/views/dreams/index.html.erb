@@ -4,6 +4,8 @@
 </p>
 <ul>
   <% @dreams.each do |dream| %>
-  <li><%= dream.name %></li>
+  <li>
+    <%= link_to dream.name, dream_path(dream.id) %>
+  </li>
   <% end %>
 </ul>

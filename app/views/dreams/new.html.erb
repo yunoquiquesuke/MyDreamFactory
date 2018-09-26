@@ -1,0 +1,12 @@
+<h1>What is your new Dream?</h1>
+<%= form_for :dream, url: dreams_path do |f| %>
+<p>
+  <%= f.text_field :name, placeholder: 'enter your dream' %>
+</p>
+<p>
+  <%= f.date_field :due, placeholder: 'enter the due' %>
+</p>
+<p>
+  <%= f.submit %>
+</p>
+<% end %>
