@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  dream_id: 1
+  project_level: 1
+  due: 2018-09-27
+  is_done: 1
+
+two:
+  name: MyString
+  dream_id: 1
+  project_level: 1
+  due: 2018-09-27
+  is_done: 1
