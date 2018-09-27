@@ -3,27 +3,33 @@
 </h2>
 
 <p>
-  期限は<%= @dream.due %>
+  <%= @dream.due %>まで
   <%= link_to '[夢変更]', edit_dream_path(@dream), class: "command" %>
-  <%= link_to '[夢削除]', dream_path(@dream), method: :delete, class: "command", data: { confirm: 'ほんと？' } %>
+  <%= link_to '[夢削除]', dream_path(@dream), method: :delete, class: "command", data: { confirm: '消しちゃう？' } %>
 </p>
 
 <% if @dream.projects.any? %>
   <% @dream.projects.each do |project| %>
   <h3 class:"project"> Lv.<%= project.project_level %> ー <%= project.name %> </h3>
-  <p><%= project.due %></p>
+  <p>
+    <%= project.due %>まで
+    <%= link_to '[プロジェクト変更]', edit_dream_project_path(id: project.id, dream_id: @dream.id), class: "command" %>
+    <%= link_to '[プロジェクト削除]', dream_project_path(dream_id: @dream.id, id: project.id), method: :delete, class: "command", data: { confirm: '消しちゃう？' } %>
+  </p>
     <% if project.tasks.any? %>
       <ul>
       <% project.tasks.each do |task| %>
           <li>
             <%= task.name %>
+            <!-- <%= link_to '[夢変更]', edit_dream_path(@dream), class: "command" %>
+            <%= link_to '[夢削除]', dream_path(@dream), method: :delete, class: "command", data: { confirm: 'ほんと？' } %> -->
           </li>
       <% end %>
       </ul>
     <% end %>
 
     <%= form_for([project, project.tasks.build], url: { controller: :task, action: :create, dream_id: @dream.id, project_id: project.id }) do |f| %>
-    <p>タスク名<%= f.text_field :name %><%= f.submit %></p>
+    <p>　   タスク名<%= f.text_field :name %><%= f.submit %></p>
     <%= f.hidden_field :is_done, value: 0 %>
 
     <% end %>
@@ -32,9 +38,6 @@
 
 <h3>新規project追加</h3>
 <%= form_for([@dream, @dream.projects.build], url: { controller: :project, action: :create, dream_id: @dream }) do |f| %>
-<h4>Lv.<%= f.number_field :project_level %></h4>
-<h4>プロジェクト名<%= f.text_field :name %></h4>
-<%= f.hidden_field :is_done, value: 0 %>
-<p>期限：<%= f.date_field :due %></p>
+<p>Lv. <%= f.number_field :project_level %> ー プロジェクト名<%= f.text_field :name %><%= f.hidden_field :is_done, value: 0 %> 期限：<%= f.date_field :due %></p>
 <p><%= f.submit %></p>
 <% end %>

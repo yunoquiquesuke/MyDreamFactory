@@ -11,6 +11,26 @@ class ProjectController < ApplicationController
     redirect_to dream_path(@dream)
   end
 
+  def edit
+    @project = Project.find(params[:id])
+  end
+
+  def update
+    @project = Project.find(params[:id])
+    project_params
+    if @project.update(@new_project)
+      redirect_to dream_path(params[:dream_id])
+    else
+      render 'edit'
+    end
+  end
+
+  def destroy
+    @project = Project.find(params[:id])
+    @project.destroy
+    redirect_to dream_path(params[:dream_id])
+  end
+
   private
     def project_params
       @new_project = params.require(:project).permit(:name, :project_level, :due, :is_done)

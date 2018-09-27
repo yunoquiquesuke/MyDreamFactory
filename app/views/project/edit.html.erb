@@ -1,20 +1,22 @@
 <h1>成功の鍵はプロジェクトの細分化！</h1>
-<%= form_for @project, url: dream_path(@project) do |f| %>
+<%= form_for @project, url: dream_project_path(dream_id: params[:dream_id], id: params[:id]), action: :update do |f| %>
 <p>
-  <%= f.text_field :name, placeholder: 'Enter your dream' %>
-  <% if @dream.errors.messages[:name].any? %>
-  <span class="error"><%= @dream.errors.messages[:name][0] %></span>
-  <% end %>
-
-</p>
-<p>
-  <%= f.date_field :due, placeholder: 'Enter the due' %>
-  <% if @dream.errors.messages[:due].any? %>
-  <span class="error"><%= @dream.errors.messages[:due][0] %></span>
+  Lv.<%= f.number_field :project_level %>
+  <% if @project.errors.messages[:project_level].any? %>
+  <span class="error"><%= @project.errors.messages[:project_level][0] %></span>
   <% end %>
 </p>
-  <%= f.hidden_field :is_done, value:0 %>
 <p>
-  <%= f.submit %>
+  プロジェクト名<%= f.text_field :name %>
+  <% if @project.errors.messages[:name].any? %>
+  <span class="error"><%= @project.errors.messages[:name][0] %></span>
+  <% end %>
 </p>
+<p>
+  期限：<%= f.date_field :due %>
+  <% if @project.errors.messages[:due].any? %>
+  <span class="error"><%= @project.errors.messages[:due][0] %></span>
+  <% end %>
+</p>
+<p><%= f.submit %></p>
 <% end %>
