@@ -1,5 +1,5 @@
-<h1>夢はどんどん変えていこう！</h1>
-<%= form_for @dream, url: dream_path(@dream) do |f| %>
+<h1>成功の鍵はプロジェクトの細分化！</h1>
+<%= form_for @project, url: dream_path(@project) do |f| %>
 <p>
   <%= f.text_field :name, placeholder: 'Enter your dream' %>
   <% if @dream.errors.messages[:name].any? %>
