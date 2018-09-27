@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root 'top#index'
   resources :dream do
     resources :project do
-      resources :task, only: [:create, :update]
+      resources :task, only: [:create, :update, :destroy]
     end
   end
 

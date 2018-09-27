@@ -9,6 +9,12 @@ class TaskController < ApplicationController
     redirect_to dream_path(params[:dream_id])
   end
 
+  def destroy
+    @task = Task.find(params[:id])
+    @task.destroy
+    redirect_to dream_path(params[:dream_id])
+  end
+
   private
     def task_params
       @new_task = params.require(:task).permit(:name, :is_done)

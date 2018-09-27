@@ -1,11 +1,16 @@
 <h2>
   <%= @dream.name %>のプロジェクト一覧
 </h2>
+<p>
+  <%= link_to '[夢一覧へ]', dream_index_path, class: "return" %>
+  <%= link_to '[トップへ]', top_path, class: "return" %>
+</p>
+
 
 <p>
   <%= @dream.due %>まで
   <%= link_to '[夢変更]', edit_dream_path(@dream), class: "command" %>
-  <%= link_to '[夢削除]', dream_path(@dream), method: :delete, class: "command", data: { confirm: '消しちゃう？' } %>
+  <%= link_to '[夢削除]', dream_path(@dream), method: :delete, class: "command", data: { confirm: '消しちゃうよ...？' } %>
 </p>
 
 <% if @dream.projects.any? %>
@@ -14,15 +19,14 @@
   <p>
     <%= project.due %>まで
     <%= link_to '[プロジェクト変更]', edit_dream_project_path(id: project.id, dream_id: @dream.id), class: "command" %>
-    <%= link_to '[プロジェクト削除]', dream_project_path(dream_id: @dream.id, id: project.id), method: :delete, class: "command", data: { confirm: '消しちゃう？' } %>
+    <%= link_to '[プロジェクト削除]', dream_project_path(dream_id: @dream.id, id: project.id), method: :delete, class: "command", data: { confirm: '消しちゃうよ...？' } %>
   </p>
     <% if project.tasks.any? %>
       <ul>
       <% project.tasks.each do |task| %>
           <li>
             <%= task.name %>
-            <!-- <%= link_to '[夢変更]', edit_dream_path(@dream), class: "command" %>
-            <%= link_to '[夢削除]', dream_path(@dream), method: :delete, class: "command", data: { confirm: 'ほんと？' } %> -->
+            <%= link_to '[x]', dream_project_task_path(id: task.id, project_id: project.id, dream_id: @dream.id), method: :delete, class: "command", data: { confirm: '消しちゃうよ...？' } %>
           </li>
       <% end %>
       </ul>

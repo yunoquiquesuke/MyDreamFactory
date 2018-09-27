@@ -1,6 +1,7 @@
 <h1>My Dreams</h1>
 <p>
-  <%= link_to '新規Dream作成', new_dream_path, class: 'new_button' %>
+  <%= link_to '[新夢作成]', new_dream_path, class: 'new' %>
+  <%= link_to '[トップへ]', top_path, class: "return" %>
 </p>
 
   <% @dreams.each do |dream| %>
