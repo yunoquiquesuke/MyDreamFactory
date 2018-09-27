@@ -7,3 +7,34 @@
   <%= link_to '[ちょっと変更]', edit_dream_path(@dream), class: "command" %>
   <%= link_to '[削除]', dream_path(@dream), method: :delete, class: "command", data: { confirm: 'ほんと？' } %>
 </p>
+
+<% if @dream.projects.any? %>
+  <% @dream.projects.each do |project| %>
+  <h3 class:"project">Lv.<%= project.level %>--<%= project.name %></h3>
+  <p>期限：<%= project.due %></p>
+    <% if project.tasks.any? %>
+      <ul>
+      <% project.tasks.each do |task| %>
+          <li>
+            <%= task.name %>
+          </li>
+      <% end %>
+      </ul>
+    <% end %>
+
+    <%= form_for([project, project.tasks]) do |f| %>
+    <p><%= f.text_field :name %></p>
+    <p><%= f.submit %></p>
+
+    <% end %>
+  <% end %>
+<% end %>
+
+<h3>新規project追加</h3>
+<%= form_for([@dream, @dream.projects.build], url: { controller: :project, action: :create, dream_id: @dream }) do |f| %>
+<h4>Lv.<%= f.number_field :level %></h4>
+<h4>プロジェクト名<%= f.text_field :name %></h4>
+<%= f.hidden_field :is_done, value: 0 %>
+<p>期限：<%= f.date_field :due %></p>
+<p><%= f.submit %></p>
+<% end %>

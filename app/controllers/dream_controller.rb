@@ -10,6 +10,7 @@ class DreamController < ApplicationController
 
   def show
     @dream = Dream.find(params[:id])
+    @new_project = Project.new
   end
 
   def create
