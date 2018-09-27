@@ -22,7 +22,7 @@
       </ul>
     <% end %>
 
-    <%= form_for([project, project.tasks]) do |f| %>
+    <%= form_for([project, project.tasks.build], url: {controller: :task, action: :create, project_id: project.id}) do |f| %>
     <p><%= f.text_field :name %></p>
     <p><%= f.submit %></p>
 
