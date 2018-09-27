@@ -1,7 +1,7 @@
 class DreamController < ApplicationController
 
   def index
-    @dreams = Dream.all.order(created_at: 'asc')
+    @dreams = Dream.all.order(due: 'asc')
   end
 
   def new

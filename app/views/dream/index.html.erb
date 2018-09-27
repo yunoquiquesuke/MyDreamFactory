@@ -5,7 +5,10 @@
 </p>
 
   <% @dreams.each do |dream| %>
-<h2>
-    <%= link_to dream.name, dream_path(dream.id) %>
-</h2>
+    <h2>
+      <%= link_to dream.name, dream_path(dream.id) %>
+    </h2>
+    <p>
+      <%= dream.due %>まで
+    </p>
   <% end %>
