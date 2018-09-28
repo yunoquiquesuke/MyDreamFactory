@@ -1,7 +1,7 @@
 <h1>今日と明日と明々後日の予定</h1>
 <p><%= link_to '[トップへ]', top_path, class: "return" %></p>
 
-<h2 class:"date">今日</h2>
+<h2 class="d">今日</h2>
 <h2>ーーーーー夢のためのプロジェクトーーーーー</h2>
 <% @today_dreams.each do |today_dream| %>
   <h2>夢：<%= today_dream.name %></h2>
@@ -20,7 +20,7 @@
 
 <h2>ーーーーーーその他のTo Doたちーーーーーー</h2>
 <% @today_yet_dreams.each do |today_yet_dream| %>
-  <h2>夢：<%= today_yet_dream.name %></h2>
+  <h2><%= today_yet_dream.name %></h2>
   <% today_yet_dream.yet_projects.where(due: @d).each do |today_yet_project| %>
     <h4>一言：<%= today_yet_project.name %><%= link_to '[削除]', yet_dream_yet_project_path(yet_dream_id: today_yet_dream.id, id: today_yet_project.id), method: :delete, class: "command", data: { confirm: '消しちゃうよ...？' } %>
     </h4>
@@ -34,7 +34,7 @@
   <% end %>
 <% end %>
 
-<h2 class:"date">明日</h2>
+<h2 class="d">明日</h2>
 <h2>ーーーーー夢のためのプロジェクトーーーーー</h2>
 <% @tomorrow_dreams.each do |tomorrow_dream| %>
   <h2>夢：<%= tomorrow_dream.name %></h2>
@@ -53,7 +53,7 @@
 
 <h2>ーーーーーーその他のTo Doたちーーーーーー</h2>
 <% @tomorrow_yet_dreams.each do |tomorrow_yet_dream| %>
-  <h2>夢：<%= tomorrow_yet_dream.name %></h2>
+  <h2><%= tomorrow_yet_dream.name %></h2>
   <% tomorrow_yet_dream.yet_projects.where(due: @d + 1).each do |tomorrow_yet_project| %>
     <h4>一言：<%= tomorrow_yet_project.name %><%= link_to '[削除]', yet_dream_yet_project_path(yet_dream_id: tomorrow_yet_dream.id, id: tomorrow_yet_project.id), method: :delete, class: "command", data: { confirm: '消しちゃうよ...？' } %>
     </h4>
@@ -68,7 +68,7 @@
 <% end %>
 
 
-<h2 class:"date">明々後日</h2>
+<h2 class="d">明々後日</h2>
 <h2>ーーーーー夢のためのプロジェクトーーーーー</h2>
 <% @two_days_after_tomorrow_dreams.each do |two_days_after_tomorrow_dream| %>
   <h2>夢：<%= two_days_after_tomorrow_dream.name %></h2>
@@ -87,7 +87,7 @@
 
 <h2>ーーーーーーその他のTo Doたちーーーーーー</h2>
 <% @two_days_after_tomorrow_yet_dreams.each do |two_days_after_tomorrow_yet_dream| %>
-  <h2>夢：<%= two_days_after_tomorrow_yet_dream.name %></h2>
+  <h2><%= two_days_after_tomorrow_yet_dream.name %></h2>
   <% two_days_after_tomorrow_yet_dream.yet_projects.where(due: @d + 3).each do |two_days_after_tomorrow_yet_project| %>
     <h4>一言：<%= two_days_after_tomorrow_yet_project.name %><%= link_to '[削除]', yet_dream_yet_project_path(yet_dream_id: two_days_after_tomorrow_yet_dream.id, id: two_days_after_tomorrow_yet_project.id), method: :delete, class: "command", data: { confirm: '消しちゃうよ...？' } %>
     </h4>
