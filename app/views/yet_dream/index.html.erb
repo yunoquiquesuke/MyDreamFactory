@@ -1,0 +1,11 @@
+<h1>その他（夢になりきれていないものたち）</h1>
+<p>
+  <%= link_to '[新項目作成]', new_yet_dream_path, class: 'new' %>
+  <%= link_to '[トップへ]', top_path, class: "return" %>
+</p>
+
+  <% @yet_dreams.each do |yet_dream| %>
+    <h2>
+      <%= link_to yet_dream.name, yet_dream_path(yet_dream.id) %>
+    </h2>
+  <% end %>

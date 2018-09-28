@@ -1,0 +1,42 @@
+<h2>
+  <%= @yet_dream.name %>のタスク一覧
+</h2>
+<p>
+  <%= link_to '[その他一覧へ]', yet_dream_index_path, class: "return" %>
+  <%= link_to '[トップへ]', top_path, class: "return" %>
+</p>
+
+
+<p>
+  <%= link_to '[項目削除]', yet_dream_path(@yet_dream), method: :delete, class: "command", data: { confirm: '消しちゃうよ...？' } %>
+</p>
+
+<% if @yet_dream.yet_projects.any? %>
+  <% @yet_dream.yet_projects.each do |yet_project| %>
+  <h3 class:"project"> <%= yet_project.due %>のタスク（<%= yet_project.name %>） </h3>
+  <p>
+  </p>
+    <% if yet_project.yet_tasks.any? %>
+      <ul>
+      <% yet_project.yet_tasks.each do |yet_task| %>
+          <li>
+            <%= yet_task.name %>
+            <%= link_to '[x]', yet_dream_yet_project_yet_task_path(id: yet_task.id, yet_project_id: yet_project.id, yet_dream_id: @yet_dream.id), method: :delete, class: "command", data: { confirm: '消しちゃうよ...？' } %>
+          </li>
+      <% end %>
+      </ul>
+    <% end %>
+
+    <%= form_for([yet_project, yet_project.yet_tasks.build], url: { controller: :yet_task, action: :create, yet_dream_id: @yet_dream.id, yet_project_id: yet_project.id }) do |f| %>
+    <p>　   タスク名<%= f.text_field :name %><%= f.submit %></p>
+    <%= f.hidden_field :is_done, value: 0 %>
+
+    <% end %>
+  <% end %>
+<% end %>
+
+<h3>新しい日付追加</h3>
+<%= form_for([@yet_dream, @yet_dream.yet_projects.build], url: { controller: :yet_project, action: :create, yet_dream_id: @yet_dream }) do |f| %>
+<p><%= f.date_field :due %>のタスク（<%= f.text_field :name, placeholder: '一言どうぞ' %>）<%= f.hidden_field :is_done, value: 0 %></p>
+<p><%= f.submit %></p>
+<% end %>

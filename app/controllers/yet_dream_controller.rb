@@ -1,6 +1,6 @@
 class YetDreamController < ApplicationController
   def index
-    @yet_dreams = YetDream.all.order
+    @yet_dreams = YetDream.all
   end
 
   def new

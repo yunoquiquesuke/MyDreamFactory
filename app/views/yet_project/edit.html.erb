@@ -1,0 +1,16 @@
+<h1>1日に詰めすぎないこと！理想と現実は違うよ</h1>
+<%= form_for @yet_project, url: yet_dream_yet_project_path(yet_dream_id: params[:yet_dream_id], id: params[:id]), action: :update do |f| %>
+<p>
+  日付<%= f.date_field :due %>
+  <% if @yet_project.errors.messages[:due].any? %>
+  <span class="error"><%= @yet_project.errors.messages[:due][0] %></span>
+  <% end %>
+</p>
+<p>
+  一言<%= f.text_field :name %>
+  <% if @yet_project.errors.messages[:name].any? %>
+  <span class="error"><%= @yet_project.errors.messages[:name][0] %></span>
+  <% end %>
+</p>
+<p><%= f.submit %></p>
+<% end %>
