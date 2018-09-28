@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_26_165012) do
+ActiveRecord::Schema.define(version: 2018_09_28_140726) do
 
   create_table "dreams", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -37,6 +37,29 @@ ActiveRecord::Schema.define(version: 2018_09_26_165012) do
     t.integer "is_done"
     t.integer "duration"
     t.integer "quality"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "yet_dreams", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "yet_projects", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.integer "yet_dream_id"
+    t.date "due"
+    t.integer "is_done"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "yet_tasks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.integer "yet_project_id"
+    t.integer "is_done"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
