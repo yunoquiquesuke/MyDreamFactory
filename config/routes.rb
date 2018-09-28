@@ -3,10 +3,16 @@ Rails.application.routes.draw do
   root 'top#index'
   resources :dream do
     resources :project do
-      resources :task, only: [:create, :update, :destroy]
+      resources :task, only: [:create, :destroy]
     end
   end
 
+  resources :yet_dream do
+    resources :yet_project do
+      resources :yet_task, only: [:create, :destroy]
+    end
+  end
+  
   get '/top', to: 'top#index'
   get '/daily', to: 'daily#index'
 
